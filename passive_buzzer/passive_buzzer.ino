@@ -7,6 +7,7 @@ int tonee;
 
 int buzzTime = 5;
 float buzzTime2 = 100;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
