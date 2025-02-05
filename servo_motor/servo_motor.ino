@@ -3,11 +3,13 @@
 int servoPin = 9;
 int servoPos = 0;
 int prPin = A5;
-int prVal;
+int lightVal;
 Servo myservo;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(servoPin, OUTPUT);
+  pinMode(prPin, INPUT);
   myservo.attach(servoPin);
 }
 
@@ -33,19 +35,15 @@ void loop() {
 
 
   Serial.print("The light value is: ");
-  prVal = analogRead(prPin);
 
-  Serial.println(prVal);
+  lightVal = analogRead(prPin);
 
-
-  if (prVal < 450) {
-    servoPos = 90;
-    myservo.write(servoPos);
-  }
-  if (prVal > 450) {
-    servoPos = 180;
-    myservo.write(servoPos);
-  }
-
+  Serial.println(lightVal);
   delay(200);
+
+
+  servoPos = (-0.4 * lightVal) + 240;
+  myservo.write(servoPos);
+
+ 
 }
